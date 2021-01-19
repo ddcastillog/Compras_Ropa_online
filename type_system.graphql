@@ -1,6 +1,93 @@
 type Query {
-    
+    productos(nombre_producto:String):[Producto]
+    generos(nombre_genero:String):[Genero]
+    tipo_productos(nombre_producto:String):[Tipo_producto]
+    tallas(nombre_talla:String):[Talla]
 }
 type Mutation{
-  
+    createProducto(producto: ProductoInput):Producto
+    updateProducto(producto: ProductoUpdateInput): Producto
+    deleteProducto(id: Int): Producto
+
+    createGenero(genero: GeneroInput):Genero
+    updateGenero(genero: GeneroUpdateInput):Genero
+    deleteGenero(id: Int):Genero
+    
+    createTipo_producto(tipo_producto: Tipo_productoInput):Tipo_producto
+    updateTipo_producto(tipo_producto: Tipo_productoUpdateInput):Tipo_producto
+    deleteTipo_producto(id: Int):Tipo_producto
+
+    createTalla(talla: TallaInput):Talla
+    updateTalla(talla: TallaUpdateInput):Talla
+    deleteTalla(id: Int):Talla
 }
+input ProductoInput{
+    id_genero:[Genero]       
+    id_tipo:[Tipo_producto]          
+    id_talla:[Talla]          
+    nombre_producto:String!  
+    cantidad:Int          
+    precio:Float       
+    descripcion:String      
+    imagen:String
+}
+input ProductoUpdateInput{
+    id_producto:Int!      
+    id_genero:[Genero]       
+    id_tipo:[Tipo_producto]          
+    id_talla:[Talla]          
+    nombre_producto:String!  
+    cantidad:Int          
+    precio:Float       
+    descripcion:String      
+    imagen:String
+}
+input GeneroInput{
+    nombre_genero:String!
+}
+input GeneroUpdateInput{
+    id_genero:Int!
+    nombre_genero:String!
+}
+input Tipo_productoInput{
+    nombre_tipo:String!
+    descuento_tipo:Float
+}
+input Tipo_productoUpdateInput{
+    id_tipo:Int!
+    nombre_tipo:String!
+    descuento_tipo:Float
+}
+input TallaInput{
+    nombre_talla:String!
+}
+input TallaUpdateInput{
+    id_talla:Int!
+    nombre_talla:String!
+}
+type Producto{
+    id_producto:Int!      
+    id_genero:[Genero]       
+    id_tipo:[Tipo_producto]          
+    id_talla:[Talla]          
+    nombre_producto:String!  
+    cantidad:Int          
+    precio:Float       
+    descripcion:String      
+    imagen:String          
+}
+type Genero{
+    id_genero:Int!
+    nombre_genero:String!
+}
+type Tipo_producto{
+    id_tipo:Int!
+    nombre_tipo:String!
+    descuento_tipo:Float
+}
+type Talla{
+    id_talla:Int!
+    nombre_talla:String!
+}
+
+
