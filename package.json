@@ -7,16 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --exec babel-node index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ddcastillog/Compras_Ropa_online.git"
-  },
   "author": "dannielos",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ddcastillog/Compras_Ropa_online/issues"
-  },
-  "homepage": "https://github.com/ddcastillog/Compras_Ropa_online#readme",
   "devDependencies": {
     "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
