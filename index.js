@@ -9,7 +9,10 @@ const bodyParser=require('body-parser')
 const Port=3001
 const endPoint="/ropa_api"
 //GrapQL configurations
-const typeDefs=importSchema("type_system.graphql")
+//const ropa=importSchema("ropa.graphql")
+//const user=importSchema("user.graphql")
+//const typeDefs=[ropa,user]
+const typeDefs=importSchema("ropa.graphql")
 import resolvers from "./resolvers"
 //const resolver=require("./resolvers")
 const schema=makeExecutableSchema({
