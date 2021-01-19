@@ -1,0 +1,33 @@
+{
+  "name": "compras_ropa_online",
+  "version": "1.0.0",
+  "description": "Tienda de ropa online",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ddcastillog/Compras_Ropa_online.git"
+  },
+  "author": "dannielos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ddcastillog/Compras_Ropa_online/issues"
+  },
+  "homepage": "https://github.com/ddcastillog/Compras_Ropa_online#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "express": "^4.17.1",
+    "graphql": "^15.4.0",
+    "graphql-import": "^1.0.2",
+    "graphql-server-express": "^1.4.1",
+    "graphql-tools": "^7.0.2",
+    "nodemon": "^2.0.7",
+    "pg-promise": "^10.9.1"
+  }
+}
