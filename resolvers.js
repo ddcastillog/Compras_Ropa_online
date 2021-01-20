@@ -87,7 +87,7 @@ const RopaResolver = {
         }, async updateTalla(root, { talla }) {
             if (talla === undefined) return null
             const query = `UPDATE talla SET nombre_talla=$2 where id_talla=$1 returning *;`
-            let result = await db.one(query, [talla.id_talla,talla,])
+            let result = await db.one(query, [talla.id_talla,talla.nombre_talla])
             return result
         }, async deleteTalla(root, { id }) {
             const query = `DELETE FROM talla  where id_talla=$1 returning *;`
