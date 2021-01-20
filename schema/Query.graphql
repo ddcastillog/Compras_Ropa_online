@@ -3,5 +3,5 @@ type Query {
     generos(nombre_genero:String):[Genero]
     tipo_productos(tipo_producto:String):[Tipo_producto]
     tallas(nombre_talla:String):[Talla]
-    usuario(id_usario:String):[Usuario]
+    usuario(id_usuario:String):[Usuario]
 }
