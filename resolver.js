@@ -37,6 +37,10 @@ const RopaResolver = {
         id_talla(producto) {
             return db.any(`select*from talla where id_talla=$1 `, [producto.id_talla])
         }
+    }, Usuario:{
+        id_usuario(usuario){
+            return db.any("select * from usuario where id_usuario=$1",[usuario.id_usuario])
+        }
     },
     Mutation: {
         async createProducto(root, { producto }) {
@@ -97,6 +101,18 @@ const RopaResolver = {
             return result
         }, async deleteTalla(root, { id }) {
             const query = `DELETE FROM talla  where id_talla=$1 returning *;`
+            let result = await db.one(query, [id])
+            return result
+        }, async createUsuario(root, {usuario}){
+            const query = `INSERT INTO usuario(id_usuario, clave, nombre, apellido) values($1, $2, $3, $4) returning *;`
+            let result = await db.one(query, [usuario.id_usuario, usuario.clave, usuario.nombre, usuario.apellido])
+            return result
+        }, async updateUsuario(root, {usuario}){
+            const query = `UPDATE usuario set clave=$2, nombre=$3, apellido=$4 where id_usuario=$1 returning *;`
+            let result = await db.one(query, [usuario.id_usuario, usuario.clave, usuario.nombre, usuario.apellido])
+            return result
+        }, async deleteUsuario(root, {id}){
+            const query = `DELETE FROM usuario where id_usuario=$1 returning *;`
             let result = await db.one(query, [id])
             return result
         }
