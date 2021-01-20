@@ -21,6 +21,11 @@ const RopaResolver = {
                 return db.any("select*from talla")
             else
                 return db.any("select*from talla where id_talla=$1", [nombre_talla])
+        }, usuario(root, {id_usuario}){
+            if (id_usuario === undefined)
+                return db.any("select * from usuario")
+            else
+                return db.any("select * from usuario where id_usuario=$1", [id_usuario])
         }
     }, Producto: {
         id_genero(producto) {
