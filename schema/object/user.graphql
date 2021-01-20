@@ -1,14 +1,4 @@
-type Query {
-    usuario(id_usario:String):[Usuario]
-   
-}
-type Mutation{
-    createUsuario(usuarioo: UsuarioInput):Usuario
-    updateUsuario(usuario: UsuarioUpdateInput):Usuario
-    deleteUsuario(id: Int): Usuario
 
-
-}
 input UsuarioInput{
     id_usuario:String!
     clave:String!
@@ -21,7 +11,6 @@ input UsuarioUpdateInput{
     nombre:String!
     apellido:String!
 }
-ty
 type Usuario{
     id_usuario:String!
     clave:String!

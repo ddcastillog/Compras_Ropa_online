@@ -1,10 +1,10 @@
 //packges
 const express= require("express")
 const{graphqlExpress,graphiqlExpress}= require("graphql-server-express")
-const{importSchema}=require("graphql-import")
 const{makeExecutableSchema}=require("graphql-tools")
 const bodyParser=require('body-parser')
-
+import { mergeTypeDefs } from '@graphql-tools/merge';
+import { loadFilesSync } from '@graphql-tools/load-files';
 //variables
 const Port=3001
 const endPoint="/ropa_api"
@@ -12,8 +12,8 @@ const endPoint="/ropa_api"
 //const ropa=importSchema("ropa.graphql")
 //const user=importSchema("user.graphql")
 //const typeDefs=[ropa,user]
-const typeDefs=importSchema("ropa.graphql")
-import resolvers from "./resolvers"
+const typeDefs=mergeTypeDefs(loadFilesSync(`${__dirname}/**/*.graphql`));
+import resolvers from "./resolver"
 //const resolver=require("./resolvers")
 const schema=makeExecutableSchema({
     typeDefs,

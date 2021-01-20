@@ -1,26 +1,3 @@
-type Query {
-    productos(id_producto:String):[Producto]
-    generos(nombre_genero:String):[Genero]
-    tipo_productos(tipo_producto:String):[Tipo_producto]
-    tallas(nombre_talla:String):[Talla]
-}
-type Mutation{
-    createProducto(producto: ProductoInput):Producto
-    updateProducto(producto: ProductoUpdateInput): Producto
-    deleteProducto(id: Int): Producto
-
-    createGenero(genero: GeneroInput):Genero
-    updateGenero(genero: GeneroUpdateInput):Genero
-    deleteGenero(id: Int):Genero
-    
-    createTipo_producto(tipo_producto: Tipo_productoInput):Tipo_producto
-    updateTipo_producto(tipo_producto: Tipo_productoUpdateInput):Tipo_producto
-    deleteTipo_producto(id: Int):Tipo_producto
-
-    createTalla(talla: TallaInput):Talla
-    updateTalla(talla: TallaUpdateInput):Talla
-    deleteTalla(id: Int):Talla
-}
 input ProductoInput{
     nombre_producto:String! 
     id_genero:Int       
