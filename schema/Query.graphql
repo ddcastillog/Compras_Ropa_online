@@ -1,0 +1,7 @@
+type Query {
+    productos(id_producto:String):[Producto]
+    generos(nombre_genero:String):[Genero]
+    tipo_productos(tipo_producto:String):[Tipo_producto]
+    tallas(nombre_talla:String):[Talla]
+    usuario(id_usario:String):[Usuario]
+}
