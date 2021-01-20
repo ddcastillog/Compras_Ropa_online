@@ -1,7 +1,7 @@
 type Query {
     productos(id_producto:String):[Producto]
     generos(nombre_genero:String):[Genero]
-    tipo_productos(nombre_producto:String):[Tipo_producto]
+    tipo_productos(tipo_producto:String):[Tipo_producto]
     tallas(nombre_talla:String):[Talla]
 }
 type Mutation{
@@ -23,9 +23,9 @@ type Mutation{
 }
 input ProductoInput{
     nombre_producto:String! 
-    id_genero:[Int]       
-    id_tipo:[Int]          
-    id_talla:[Int]      
+    id_genero:Int       
+    id_tipo:Int          
+    id_talla:Int      
     cantidad:Int          
     precio:Float       
     descripcion:String      
@@ -33,9 +33,9 @@ input ProductoInput{
 }
 input ProductoUpdateInput{
     id_producto:Int!      
-    id_genero:[Int]       
-    id_tipo:[Int]          
-    id_talla:[Int]          
+    id_genero:Int       
+    id_tipo:Int         
+    id_talla:Int          
     nombre_producto:String!  
     cantidad:Int          
     precio:Float       
@@ -67,9 +67,9 @@ input TallaUpdateInput{
 }
 type Producto{
     id_producto:Int!      
-    id_genero:[Genero]       
-    id_tipo:[Tipo_producto]          
-    id_talla:[Talla]          
+    id_genero:Genero      
+    id_tipo:Tipo_producto          
+    id_talla:Talla         
     nombre_producto:String!  
     cantidad:Int          
     precio:Float       
