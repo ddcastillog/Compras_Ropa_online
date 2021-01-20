@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "apollo-server-express": "^2.19.2",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "graphql-yoga": "^1.18.3"
   }
 }
