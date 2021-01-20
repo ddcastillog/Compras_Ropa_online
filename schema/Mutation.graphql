@@ -15,7 +15,7 @@ type Mutation{
     updateTalla(talla: TallaUpdateInput):Talla
     deleteTalla(id: Int):Talla
 
-    createUsuario(usuarioo: UsuarioInput):Usuario
+    createUsuario(usuario: UsuarioInput):Usuario
     updateUsuario(usuario: UsuarioUpdateInput):Usuario
     deleteUsuario(id: Int): Usuario
 }
