@@ -14,8 +14,7 @@ const endPoint="/ropa_api"
 //const user=importSchema("user.graphql")
 //const typeDefs=[ropa,user]
 const typeDefs=mergeTypeDefs(loadFilesSync(`${__dirname}/**/*.graphql`));
-console.log(typeDefs)
-import resolvers from "./resolvers"
+import resolvers from "./resolvers/resolvers"
 //const resolver=require("./resolvers")
 const schema=makeExecutableSchema({
     typeDefs,
