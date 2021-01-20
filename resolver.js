@@ -37,10 +37,6 @@ const RopaResolver = {
         id_talla(producto) {
             return db.any(`select*from talla where id_talla=$1 `, [producto.id_talla])
         }
-    }, Usuario:{
-        id_usuario(usuario){
-            return db.any("select * from usuario where id_usuario=$1",[usuario.id_usuario])
-        }
     },
     Mutation: {
         async createProducto(root, { producto }) {
