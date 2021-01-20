@@ -3,10 +3,12 @@ const express= require("express")
 const{graphqlExpress,graphiqlExpress}= require("graphql-server-express")
 const{makeExecutableSchema}=require("graphql-tools")
 const bodyParser=require('body-parser')
+
+const cors = require("cors")
 import { mergeTypeDefs } from '@graphql-tools/merge';
 import { loadFilesSync } from '@graphql-tools/load-files';
 //variables
-const Port=3001
+const Port=3010
 const endPoint="/ropa_api"
 //GrapQL configurations
 //const ropa=importSchema("ropa.graphql")
@@ -21,7 +23,14 @@ const schema=makeExecutableSchema({
 })
 //web Server Express
 const app = express()
-app.use(endPoint,bodyParser.json(),graphqlExpress({schema}))
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+    next();
+});
+app.use(endPoint,bodyParser.json(),graphqlExpress({schema,rootValue:resolvers}))
 app.use("/graphiql",graphiqlExpress({endpointURL:endPoint}))
 //API-GRaphQL excution
 app.listen(Port,()=>{

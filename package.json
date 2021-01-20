@@ -21,5 +21,9 @@
     "graphql-tools": "^7.0.2",
     "nodemon": "^2.0.7",
     "pg-promise": "^10.9.1"
+  },
+  "dependencies": {
+    "apollo-server-express": "^2.19.2",
+    "cors": "^2.8.5"
   }
 }
