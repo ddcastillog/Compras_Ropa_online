@@ -8,5 +8,5 @@ const server = new GraphQLServer({
   resolvers
 });
 server.start({ port: 3100 }, ({ port }) => {
-  console.log('Server on port http://localhost:', port);
+  console.log('Server on port http://localhost:'+port);
 });
