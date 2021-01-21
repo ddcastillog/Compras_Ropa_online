@@ -17,5 +17,5 @@ type Mutation{
 
     createUsuario(usuario: UsuarioInput):Usuario
     updateUsuario(usuario: UsuarioUpdateInput):Usuario
-    deleteUsuario(id: Int): Usuario
+    deleteUsuario(id:String): Usuario
 }
