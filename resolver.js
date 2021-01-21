@@ -1,31 +1,31 @@
 const { db } = require("./cnn")
 const RopaResolver = {
     Query: {
-        productos(root, { id_producto }) {
+        async productos(root, { id_producto }) {
             if (id_producto === undefined)
-                return db.any("select*from producto")
+                return await db.any("select*from producto")
             else
-                return db.any("select*from producto where id_producto=$1", [id_producto])
-        }, generos(root, { nombre_genero }) {
+                return await db.any("select*from producto where id_producto=$1", [id_producto])
+        },async generos(root, { nombre_genero }) {
             if (nombre_genero === undefined)
-                return db.any("select*from genero")
+                return await db.any("select*from genero")
             else
-                return db.any("select*from genero where id_genero=$1", [nombre_genero])
-        }, tipo_productos(root, { tipo_producto }) {
+                return await db.any("select*from genero where id_genero=$1", [nombre_genero])
+        },async tipo_productos(root, { tipo_producto }) {
             if (tipo_producto === undefined)
-                return db.any("select*from tipo_producto")
+                return await db.any("select*from tipo_producto")
             else
-                return db.any("select*from tipo_producto where id_tipo=$1", [tipo_producto])
-        }, tallas(root, { nombre_talla }) {
+                return await db.any("select*from tipo_producto where id_tipo=$1", [tipo_producto])
+        },async tallas(root, { nombre_talla }) {
             if (nombre_talla === undefined)
-                return db.any("select*from talla")
+                return await db.any("select*from talla")
             else
-                return db.any("select*from talla where id_talla=$1", [nombre_talla])
-        }, usuario(root, {id_usuario}){
+                return await db.any("select*from talla where id_talla=$1", [nombre_talla])
+        },async usuario(root, {id_usuario}){
             if (id_usuario === undefined)
-                return db.any("select * from usuario")
+                return await db.any("select * from usuario")
             else
-                return db.any("select * from usuario where id_usuario=$1", [id_usuario])
+                return await db.any("select * from usuario where id_usuario=$1", [id_usuario])
         }
     }, Producto: {
         id_genero(producto) {
