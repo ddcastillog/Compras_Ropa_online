@@ -28,14 +28,15 @@ const RopaResolver = {
                 return await db.any("select * from usuario where id_usuario=$1", [id_usuario])
         }
     }, Producto: {
-        id_genero(producto) {
-            return db.any(`select*from genero where id_genero=$1 `, [producto.id_genero])
+        async id_genero(producto) {
+            console.log(producto)
+            return await db.one(`select*from genero where id_genero=$1 `, [1])
         },
-        id_tipo(producto) {
-            return db.any(`select*from tipo_producto where id_tipo=$1 `, [producto.id_tipo])
+        async id_tipo(producto) {
+            return await db.one(`select*from tipo_producto where id_tipo=$1 `, [1])
         },
-        id_talla(producto) {
-            return db.any(`select*from talla where id_talla=$1 `, [producto.id_talla])
+        async id_talla(producto) {
+            return await db.one(`select*from talla where id_talla=$1 `, [1])
         }
     },
     Mutation: {
