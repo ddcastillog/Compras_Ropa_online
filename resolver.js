@@ -6,22 +6,22 @@ const RopaResolver = {
                 return await db.any("select*from producto")
             else
                 return await db.any("select*from producto where id_producto=$1", [id_producto])
-        },async generos(root, { nombre_genero }) {
+        }, async generos(root, { nombre_genero }) {
             if (nombre_genero === undefined)
                 return await db.any("select*from genero")
             else
                 return await db.any("select*from genero where id_genero=$1", [nombre_genero])
-        },async tipo_productos(root, { tipo_producto }) {
+        }, async tipo_productos(root, { tipo_producto }) {
             if (tipo_producto === undefined)
                 return await db.any("select*from tipo_producto")
             else
                 return await db.any("select*from tipo_producto where id_tipo=$1", [tipo_producto])
-        },async tallas(root, { nombre_talla }) {
+        }, async tallas(root, { nombre_talla }) {
             if (nombre_talla === undefined)
                 return await db.any("select*from talla")
             else
                 return await db.any("select*from talla where id_talla=$1", [nombre_talla])
-        },async usuario(root, {id_usuario}){
+        }, async usuario(root, { id_usuario }) {
             if (id_usuario === undefined)
                 return await db.any("select * from usuario")
             else
@@ -29,14 +29,13 @@ const RopaResolver = {
         }
     }, Producto: {
         async id_genero(producto) {
-            console.log(producto)
-            return await db.one(`select*from genero where id_genero=$1 `, [1])
+            return await db.one(`select*from genero where id_genero=$1 `, [producto.id_genero])
         },
         async id_tipo(producto) {
-            return await db.one(`select*from tipo_producto where id_tipo=$1 `, [1])
+            return await db.one(`select*from tipo_producto where id_tipo=$1 `, [producto.id_tipo])
         },
         async id_talla(producto) {
-            return await db.one(`select*from talla where id_talla=$1 `, [1])
+            return await db.one(`select*from talla where id_talla=$1 `, [producto.id_talla])
         }
     },
     Mutation: {
@@ -100,15 +99,15 @@ const RopaResolver = {
             const query = `DELETE FROM talla  where id_talla=$1 returning *;`
             let result = await db.one(query, [id])
             return result
-        }, async createUsuario(root, {usuario}){
+        }, async createUsuario(root, { usuario }) {
             const query = `INSERT INTO usuario(id_usuario, clave, nombre, apellido) values($1, $2, $3, $4) returning *;`
             let result = await db.one(query, [usuario.id_usuario, usuario.clave, usuario.nombre, usuario.apellido])
             return result
-        }, async updateUsuario(root, {usuario}){
+        }, async updateUsuario(root, { usuario }) {
             const query = `UPDATE usuario set clave=$2, nombre=$3, apellido=$4 where id_usuario=$1 returning *;`
             let result = await db.one(query, [usuario.id_usuario, usuario.clave, usuario.nombre, usuario.apellido])
             return result
-        }, async deleteUsuario(root, {id}){
+        }, async deleteUsuario(root, { id }) {
             const query = `DELETE FROM usuario where id_usuario=$1 returning *;`
             let result = await db.one(query, [id])
             return result
