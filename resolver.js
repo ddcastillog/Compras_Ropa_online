@@ -43,7 +43,7 @@ const RopaResolver = {
             return await db.any(`select p.id_producto,p.id_genero,p.id_tipo,p.id_talla,p.nombre_producto,
             df.cantidad_detalle,p.precio,p.descripcion,p.imagen
             from producto p,detalle_factura df 
-            where df.id_producto=p.id_producto and df.id_factura='01'`, [factura.id_factura])
+            where df.id_producto=p.id_producto and df.id_factura=$1`, [factura.id_factura])
         }
     },
     Mutation: {
@@ -107,8 +107,29 @@ const RopaResolver = {
             const query = `DELETE FROM talla  where id_talla=$1 returning *;`
             let result = await db.one(query, [id])
             return result
+        }, async createFactura(root, { factura }) {
+            if (factura === undefined) return null            
+            let facturaU = await db.one(`select * from factura f order by f.id_factura desc limit 1`).catch(err => { console.log(err) })
+            let id_factura = "0001"
+            if (facturaU !== undefined) {
+                 id_factura = "000" + (parseInt(facturaU.id_factura) + 1)
+            }
+            const query = `INSERT INTO factura
+                                    Values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) returning *;`
+            let result = await db.one(query, [id_factura, 12, factura.subtotal, factura.total, new Date(), factura.cedula,
+                factura.nombre, factura.correo, factura.celular, factura.direccion])
+            if (factura.productosIDs && factura.productosIDs.length > 0) {
+                let aux = 0;
+                await factura.productosIDs.forEach(element => {
+                    let result2 = db.one(`Insert into detalle_factura(id_producto,id_factura,cantidad_detalle) Values($1,$2,$3) returning*;
+                                        `, [element, result.id_factura, factura.cantidadDetalle[aux]]).catch(err => { console.log(err) })
+                    aux++;
+                });
+                return result
+            }
+            return result
         }
-        
+
     }
 }
 export default RopaResolver;

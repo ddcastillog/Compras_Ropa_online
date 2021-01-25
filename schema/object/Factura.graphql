@@ -13,6 +13,8 @@ type Factura{
     Productos:[Producto]              
 }
 input FacturaInput{
+    subtotal:Float          
+    total:Float 
     cedula:String          
     nombre:String
     correo:String
@@ -21,8 +23,10 @@ input FacturaInput{
     productosIDs:[Int]
     cantidadDetalle:[Int]
 }
-input FacturaUpdateInput{
+input FacturaUpdateInput{    
     id_factura:String!
+    subtotal:Float          
+    total:Float 
     cedula:String          
     nombre:String
     correo:String
