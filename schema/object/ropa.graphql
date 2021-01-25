@@ -51,7 +51,8 @@ type Producto{
     cantidad:Int          
     precio:Float       
     descripcion:String      
-    imagen:String          
+    imagen:String
+    cantidad_detalle:Float          
 }
 type Genero{
     id_genero:Int!

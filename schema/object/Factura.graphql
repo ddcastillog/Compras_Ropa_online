@@ -10,7 +10,7 @@ type Factura{
     correo:String
     celular:String
     direccion:String
-    Productos:[Producto]          
+    Productos:[Producto]              
 }
 
 
