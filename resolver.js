@@ -21,11 +21,12 @@ const RopaResolver = {
                 return await db.any("select*from talla")
             else
                 return await db.any("select*from talla where id_talla=$1", [nombre_talla])
-        }, async usuario(root, { id_usuario }) {
-            if (id_usuario === undefined)
-                return await db.any("select * from usuario")
+        },
+        async factura(root, { id_factura }) {
+            if (id_factura === undefined)
+                return await db.any("select*from factura")
             else
-                return await db.any("select * from usuario where id_usuario=$1", [id_usuario])
+                return await db.any("select*from factura where id_factura=$1", [id_factura])
         }
     }, Producto: {
         async id_genero(producto) {
@@ -36,6 +37,13 @@ const RopaResolver = {
         },
         async id_talla(producto) {
             return await db.one(`select*from talla where id_talla=$1 `, [producto.id_talla])
+        }
+    }, Factura: {
+        async Productos(factura) {
+            return await db.any(`select p.id_producto,p.id_genero,p.id_tipo,p.id_talla,p.nombre_producto,
+            df.cantidad_detalle,p.precio,p.descripcion,p.imagen
+            from producto p,detalle_factura df 
+            where df.id_producto=p.id_producto and df.id_factura='01'`, [factura.id_factura])
         }
     },
     Mutation: {
@@ -97,18 +105,6 @@ const RopaResolver = {
             return result
         }, async deleteTalla(root, { id }) {
             const query = `DELETE FROM talla  where id_talla=$1 returning *;`
-            let result = await db.one(query, [id])
-            return result
-        }, async createUsuario(root, { usuario }) {
-            const query = `INSERT INTO usuario(id_usuario, clave, nombre, apellido) values($1, $2, $3, $4) returning *;`
-            let result = await db.one(query, [usuario.id_usuario, usuario.clave, usuario.nombre, usuario.apellido])
-            return result
-        }, async updateUsuario(root, { usuario }) {
-            const query = `UPDATE usuario set clave=$2, nombre=$3, apellido=$4 where id_usuario=$1 returning *;`
-            let result = await db.one(query, [usuario.id_usuario, usuario.clave, usuario.nombre, usuario.apellido])
-            return result
-        }, async deleteUsuario(root, { id }) {
-            const query = `DELETE FROM usuario where id_usuario=$1 returning *;`
             let result = await db.one(query, [id])
             return result
         }

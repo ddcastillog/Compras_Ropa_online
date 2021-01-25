@@ -1,0 +1,16 @@
+scalar LocalDate
+type Factura{
+    id_factura:String!      
+    iva:Float      
+    subtotal:Float          
+    total:Float         
+    fecha:LocalDate 
+    cedula:String          
+    nombre:String
+    correo:String
+    celular:String
+    direccion:String
+    Productos:[Producto]          
+}
+
+
