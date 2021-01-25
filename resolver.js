@@ -108,6 +108,7 @@ const RopaResolver = {
             let result = await db.one(query, [id])
             return result
         }
+        
     }
 }
 export default RopaResolver;

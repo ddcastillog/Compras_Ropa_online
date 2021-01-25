@@ -14,5 +14,10 @@ type Mutation {
   createTalla(talla: TallaInput): Talla
   updateTalla(talla: TallaUpdateInput): Talla
   deleteTalla(id: Int): Talla
+
+  createFactura(factura: FacturaInput): Factura
+  updateFactura(factura: FacturaUpdateInput): Factura
+  deleteFactura(id: String): Factura
+
   
 }

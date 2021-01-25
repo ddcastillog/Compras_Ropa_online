@@ -12,5 +12,24 @@ type Factura{
     direccion:String
     Productos:[Producto]              
 }
+input FacturaInput{
+    cedula:String          
+    nombre:String
+    correo:String
+    celular:String
+    direccion:String
+    productosIDs:[Int]
+    cantidadDetalle:[Int]
+}
+input FacturaUpdateInput{
+    id_factura:String!
+    cedula:String          
+    nombre:String
+    correo:String
+    celular:String
+    direccion:String
+    productosIDs:[Int]
+    cantidadDetalle:[Int]
+}
 
 
