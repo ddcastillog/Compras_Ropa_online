@@ -113,12 +113,21 @@ const RopaResolver = {
             let aux = 0;
             if (factura.productosIDs && factura.productosIDs.length > 0) {
                 for (let element of factura.productosIDs) {                   
-                    let producto = await db.any("select*from producto where id_producto=$1", [element])                                       
-                    cantidad[aux] = parseInt(producto[0].cantidad) - factura.cantidadDetalle[aux]
-                    if (cantidad[aux] < 0) {
+                    let producto = await db.any("select*from producto where id_producto=$1", [element])
+                    console.log(producto[0])
+                    console.log(element)
+                    if(producto[0]!==undefined) {
+                        cantidad[aux] = parseInt(producto[0].cantidad) - factura.cantidadDetalle[aux]
+                        if (cantidad[aux] < 0) {
+                            return null
+                            
+                        }
+                        aux++
+                    }else{
+                        console.log("auuuuuuuuuuu")
                         return null
-                    }
-                    aux++
+                        
+                    }         
                 }
             }           
             let facturaU = await db.one(`select count(*) from factura`).catch(err => { console.log(err) })            
