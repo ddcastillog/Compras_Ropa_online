@@ -108,25 +108,39 @@ const RopaResolver = {
             let result = await db.one(query, [id])
             return result
         }, async createFactura(root, { factura }) {
-            if (factura === undefined) return null            
-            let facturaU = await db.one(`select * from factura f order by f.id_factura desc limit 1`).catch(err => { console.log(err) })
+            if (factura === undefined) return null
+            let cantidad = []
+            let aux = 0;
+            if (factura.productosIDs && factura.productosIDs.length > 0) {
+                for (let element of factura.productosIDs) {                   
+                    let producto = await db.any("select*from producto where id_producto=$1", [element])                                       
+                    cantidad[aux] = parseInt(producto[0].cantidad) - factura.cantidadDetalle[aux]
+                    if (cantidad[aux] < 0) {
+                        return null
+                    }
+                    aux++
+                }
+            }           
+            let facturaU = await db.one(`select count(*) from factura`).catch(err => { console.log(err) })            
             let id_factura = "0001"
             if (facturaU !== undefined) {
-                 id_factura = "000" + (parseInt(facturaU.id_factura) + 1)
+                id_factura = "000" + (parseInt(facturaU.count) + 1)
             }
             const query = `INSERT INTO factura
                                     Values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) returning *;`
             let result = await db.one(query, [id_factura, 12, factura.subtotal, factura.total, new Date(), factura.cedula,
                 factura.nombre, factura.correo, factura.celular, factura.direccion])
             if (factura.productosIDs && factura.productosIDs.length > 0) {
-                let aux = 0;
-                await factura.productosIDs.forEach(element => {
-                    let result2 = db.one(`Insert into detalle_factura(id_producto,id_factura,cantidad_detalle) Values($1,$2,$3) returning*;
+                aux = 0;
+                for (let element of factura.productosIDs) {
+                    let result2 = await db.one(`Insert into detalle_factura(id_producto,id_factura,cantidad_detalle) Values($1,$2,$3) returning*;
                                         `, [element, result.id_factura, factura.cantidadDetalle[aux]]).catch(err => { console.log(err) })
+                    let result3 = await db.one(`UPDATE producto SET cantidad=$2 where id_producto=$1 
+                                                returning *;`, [element, cantidad[aux]])
                     aux++;
-                });
-                return result
+                }
             }
+
             return result
         }
 
