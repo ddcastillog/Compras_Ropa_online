@@ -4,7 +4,7 @@ const config = {
     post: '5432',
     database: 'dannielos',
     user: 'postgres',
-    password: 'postgres'
+    password: '1234'
 }
 const pgp = pgPromise({});
 const db = pgp(config);
